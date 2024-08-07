@@ -16,6 +16,13 @@ body {
   font-family: "Bebas Neue", sans-serif
 }
 
+.container {
+  perspective: 1000px;
+  /*This will add the effect of a tilt on the screen
+  perspective is complicated, but it effectively only affects the children that are tranformed withing the element*/
+  margin-bottom: 2em;
+}
+
 .movie-container {
   margin: 1em 0;
 }
@@ -65,15 +72,15 @@ This effectively allows you to choose to seat that you want to put a margin next
   margin-left: 1.1em;
 }
 
-
-/* SHOWCASE STYLING  */
-/* Here we are going to add a hover effect to "enlarge the seats" when a pointer is over them. (not including the seats in the seat type showcase) 
-Any .seat that does not match .occupied status will. on :hover, transform to larger by factor of 1.3*/
 .seat:not(.occupied):hover {
   cursor: pointer;
   /*actually changes from default to the cursor pointer*/
   transform: scale(1.3);
 }
+
+/* SHOWCASE STYLING  */
+/* Here we are going to add a hover effect to "enlarge the seats" when a pointer is over them. (not including the seats in the seat type showcase) 
+Any .seat that does not match .occupied status will. on :hover, transform to larger by factor of 1.3*/
 
 .showcase .seat:not(.occupied):hover {
   cursor: default;
@@ -106,11 +113,21 @@ Any .seat that does not match .occupied status will. on :hover, transform to lar
   /*automatically puts the seats into their respectice rows*/
 }
 
+/* SCREEN STYLE  */
 .screen {
   background-color: white;
   height: 70px;
   width: 100%;
   margin: 1em 0;
   transform: rotateX(-45deg);
+  /*ROTATING THE OBJECT ON AXIS (X IN THIS CASE)*/
   box-shadow: 0 0.1em 0.5em rgb(255, 255, 255, 0.7);
+}
+
+p.text {
+  margin: 0.5em 0;
+}
+
+p.text span {
+  color: #6feaf6
 }
