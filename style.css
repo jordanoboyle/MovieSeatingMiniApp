@@ -1,1 +1,70 @@
-s
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #242333;
+  display: flex;
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* The for lines above basically lay out our application in the center of the viewport  */
+  font-family: "Bebas Neue", sans-serif
+}
+
+.movie-container {
+  margin: 1em 0;
+}
+
+.movie-container select {
+  background-color: white;
+  border: 0;
+  border-radius: 0.5em;
+  font-size: 1em;
+  margin-left: 0.5em;
+  padding: 0.3em 0.75em 0.3em 0.75em;
+  /* em tends to be better than pixels because it takes into account smaller view ports  */
+  /* -moz-appearance: none;
+  -webkit-appearance: none; */
+  appearance: none;
+}
+
+/* Select lists look different depending on the OS so setting prefixed appearances and reg appearance to none allows us to compensate for the possible differences  */
+
+
+/* SEATS AND ROWS  */
+.seat {
+  background-color: lightgrey;
+  height: 0.5em;
+  width: 0.6em;
+  margin: 0.2em;
+  border-top-left-radius: 0.2em;
+  border-top-right-radius: 0.2em;
+  /* Here we are just styling our seat indicators. BTLR and BTRR style differen rounded corners  */
+}
+
+.seat.selected {
+  background-color: aqua;
+}
+
+.seat.occupied {
+  background-color: lightcoral;
+}
+
+/* This is a really cool piece of CSS where we are creating the aisles in the seats  */
+.seat:nth-of-type(2) {
+  margin-right: 1.1em;
+}
+
+.seat:nth-last-of-type(2) {
+  margin-right: 1.1em;
+}
+
+.row {
+  display: flex;
+  /*automatically puts the seats into their respectice rows*/
+}
