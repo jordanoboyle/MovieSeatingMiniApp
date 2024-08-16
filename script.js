@@ -8,8 +8,13 @@ const ticketPrice = +movieSelect.value;  //parseInt() is an option.
 console.log(ticketPrice);  //not dynamic but locks in the initial value from the drop down movie prices
 console.log(typeof ticketPrice); //We would like this to be a number (parse or use '+' operator on movieSelect.value)
 
-//Event Listeners
+//Update total and count:
+function updateSelectedCount() {
+  const selectedSeats = document.querySelectorAll('.row .seat.selected'); //creates a node list
+  console.log(selectedSeats); 
+}
 
+//Event Listeners
 container.addEventListener('click', (e) => {
   // console.log(e.target);  //shows us the exact element that is clicked on
   if (
@@ -18,5 +23,8 @@ container.addEventListener('click', (e) => {
   ) {
     console.log(e.target); //shows us the class of 'seat' in the console.
     e.target.classList.toggle('selected'); // .toggle() provides ability to select and deselect
+
+    updateSelectedCount();
   }
 });
+
