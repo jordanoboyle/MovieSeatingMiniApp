@@ -4,7 +4,7 @@ const count       = document.getElementById('count');
 const total       = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
-const ticketPrice = +movieSelect.value;  //parseInt() is an option.
+let ticketPrice = +movieSelect.value;  //parseInt() is an option. 
 console.log(ticketPrice);  //not dynamic but locks in the initial value from the drop down movie prices
 console.log(typeof ticketPrice); //We would like this to be a number (parse or use '+' operator on movieSelect.value)
 
@@ -21,6 +21,14 @@ function updateSelectedCount() {
 }
 
 //Event Listeners
+
+//Movie Selection Event
+movieSelect.addEventListener('change', e => {  // note diff here, 'change', which activates on DD selected
+  ticketPrice = parseInt(e.target.value);  // make sure ticketPrice is let not const
+  updateSelectedCount();
+});
+
+//Seat Click Event
 container.addEventListener('click', (e) => {
   // console.log(e.target);  //shows us the exact element that is clicked on
   if (
