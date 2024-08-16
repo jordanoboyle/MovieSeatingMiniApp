@@ -12,6 +12,12 @@ console.log(typeof ticketPrice); //We would like this to be a number (parse or u
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected'); //creates a node list
   console.log(selectedSeats); 
+
+  const selectSeatsCount = selectedSeats.length;  //provides us a the total number of seats we selected
+  console.log(selectSeatsCount);
+
+  count.innerText = selectSeatsCount;  // observe comment in index.html for effect
+  total.innerText = selectSeatsCount * ticketPrice;
 }
 
 //Event Listeners
