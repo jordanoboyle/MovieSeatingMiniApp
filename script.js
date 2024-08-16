@@ -8,16 +8,32 @@ let ticketPrice = +movieSelect.value;  //parseInt() is an option.
 console.log(ticketPrice);  //not dynamic but locks in the initial value from the drop down movie prices
 console.log(typeof ticketPrice); //We would like this to be a number (parse or use '+' operator on movieSelect.value)
 
+//Save Selected Movie and Price
+function setMovieData(movieIndex, moviePrice) {
+  localStorage.setItem('selectedMovieIndex', movieIndex);
+  localStorage.setItem('selectedMoviePrice', moviePrice);
+}
+
 //Update total and count:
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected'); //creates a node list
   console.log(selectedSeats); 
+
+  //Storing in Local Storage:
+  const seatsIndex = [...selectedSeats].map(seat => {
+    return [...seats].indexOf(seat);
+  });
+  console.log("The Seat indexes are " + seatsIndex);
+  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+
 
   const selectSeatsCount = selectedSeats.length;  //provides us a the total number of seats we selected
   console.log(selectSeatsCount);
 
   count.innerText = selectSeatsCount;  // observe comment in index.html for effect
   total.innerText = selectSeatsCount * ticketPrice;
+
+
 }
 
 //Event Listeners
@@ -25,6 +41,7 @@ function updateSelectedCount() {
 //Movie Selection Event
 movieSelect.addEventListener('change', e => {  // note diff here, 'change', which activates on DD selected
   ticketPrice = parseInt(e.target.value);  // make sure ticketPrice is let not const
+  setMovieData(e.target.selectedIndex, e.target.value);
   updateSelectedCount();
 });
 
@@ -42,3 +59,10 @@ container.addEventListener('click', (e) => {
   }
 });
 
+
+//Example of Spread operator
+
+const arr = [1, 2, 3];
+const arr2 = [...arr, 4, 5];
+console.log(arr2); 
+//High level, spread operator takes the values from the array and injects them wherever you desire
