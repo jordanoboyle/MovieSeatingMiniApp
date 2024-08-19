@@ -4,6 +4,8 @@ const count       = document.getElementById('count');
 const total       = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
+populateUI();
+
 let ticketPrice = +movieSelect.value;  //parseInt() is an option. 
 console.log(ticketPrice);  //not dynamic but locks in the initial value from the drop down movie prices
 console.log(typeof ticketPrice); //We would like this to be a number (parse or use '+' operator on movieSelect.value)
@@ -17,7 +19,7 @@ function setMovieData(movieIndex, moviePrice) {
 //Update total and count:
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected'); //creates a node list
-  console.log(selectedSeats); 
+  // console.log(selectedSeats); 
 
   //Storing in Local Storage:
   const seatsIndex = [...selectedSeats].map(seat => {
@@ -36,11 +38,35 @@ function updateSelectedCount() {
 
 }
 
-//Event Listeners
+//Get Data from LocalStorage and Populate UI
+function populateUI () {
+  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+  console.log(selectedSeats);
 
+  //Here we are checking the contents of local storage (you may be using a backend here)
+  if (selectedSeats !== null && selectedSeats.length > 0) {
+    seats.forEach((seat, index) => {
+      if (selectedSeats.indexOf(index) > -1) {
+        seat.classList.add('selected');
+      }
+    });
+  }
+
+  const selectedMovieIndex = localStorage.getItem('selectMovieIndex');
+  if (selectedMovieIndex !== null) {
+    movieSelect.selectedIndex = selectedMovieIndex;
+  }
+}
+
+//Event Listeners
 //Movie Selection Event
 movieSelect.addEventListener('change', e => {  // note diff here, 'change', which activates on DD selected
   ticketPrice = parseInt(e.target.value);  // make sure ticketPrice is let not const
+  console.log(
+    "Selected Movie index and title:", 
+    e.target.selectedIndex,
+    e.target.options[e.target.selectedIndex].textContent
+  );
   setMovieData(e.target.selectedIndex, e.target.value);
   updateSelectedCount();
 });
@@ -59,6 +85,8 @@ container.addEventListener('click', (e) => {
   }
 });
 
+//Initial Count and Total Set:
+updateSelectedCount();  //
 
 //Example of Spread operator
 
